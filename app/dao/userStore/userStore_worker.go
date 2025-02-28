@@ -34,7 +34,7 @@ func jobProcessor(job jobs.Job) {
 }
 
 func userWorker(user *User_Store) error {
-	Initialise(context.TODO())
+	Initialise(context.TODO(), useIsolatedDB)
 
 	//logHandler.InfologHandler.Printf("user Worker - [%v] - Running", h.Name, cfg.GetApplicationName())
 

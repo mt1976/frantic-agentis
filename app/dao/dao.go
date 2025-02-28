@@ -23,7 +23,7 @@ func Initialise(cfg *commonConfig.Settings) error {
 	clock := timing.Start(name, actions.INITIALISE.GetCode(), "")
 	logHandler.EventLogger.Printf("[%v] Initialising %v - Started", appName, name)
 
-	userStore.Initialise(context.TODO())
+	userStore.Initialise(context.TODO(), false)
 
 	passwordStore.Initialise(context.TODO())
 

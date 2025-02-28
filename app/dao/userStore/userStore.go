@@ -368,7 +368,7 @@ func ExportCSV() error {
 }
 
 func ImportCSV() error {
-	Initialise(context.TODO())
+	Initialise(context.TODO(), useIsolatedDB)
 	return importExportHelper.ImportCSV(domain, &User_Store{}, importProcessor)
 }
 
