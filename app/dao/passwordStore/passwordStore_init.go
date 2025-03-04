@@ -1,6 +1,6 @@
 package passwordStore
 
-// Data Access Object Password
+// Data Access Object User
 // Version: 0.2.0
 // Updated on: 2021-09-10
 
@@ -18,16 +18,21 @@ var activeDB *database.DB
 var initialised bool = false // default to false
 var cfg *commonConfig.Settings
 var appName string
+var useIsolatedDB bool = true
 
-func Initialise(ctx context.Context) {
-	//logHandler.SecurityLogger.Printf("Initialising %v", domain)
+func Initialise(ctx context.Context, isolateDB bool) {
+	//logHandler.EventLogger.Printf("Initialising %v", domain)
 	timing := timing.Start(domain, actions.INITIALISE.GetCode(), "Initialise")
 	cfg = commonConfig.Get()
 	appName = "frantic-agentis"
+	useIsolatedDB = isolateDB
 	// For a specific database connection, use NamedConnect, otherwise use Connect
-	//activeDB = database.ConnectToNamedDB("")
-	activeDB = database.Connect()
+	if useIsolatedDB {
+		activeDB = database.ConnectToNamedDB("agentis")
+	} else {
+		activeDB = database.Connect()
+	}
 	initialised = true
 	timing.Stop(1)
-	logHandler.SecurityLogger.Printf("[%v] Initialised %v", appName, domain)
+	logHandler.EventLogger.Printf("[%v] Initialised %v", appName, domain)
 }

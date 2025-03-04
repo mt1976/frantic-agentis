@@ -25,7 +25,7 @@ func Initialise(cfg *commonConfig.Settings) error {
 
 	userStore.Initialise(context.TODO(), false)
 
-	passwordStore.Initialise(context.TODO())
+	passwordStore.Initialise(context.TODO(), false)
 
 	logHandler.EventLogger.Printf("[%v] Initialising %v - Complete", appName, name)
 	clock.Stop(1)
