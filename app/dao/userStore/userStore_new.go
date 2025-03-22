@@ -49,7 +49,7 @@ func new(ctx context.Context, userName, uid, realName, email, gid, host string, 
 	record.Source = cfg.GetApplication_Name()
 
 	record.Notes = "These are some notes for " + realName + " " + record.UserCode
-
+	record.Display = record.UserCode
 	// Check for duplicates
 	xUser, err := record.isDuplicateOf(record.UserCode)
 	if err == commonErrors.ErrorDuplicate {

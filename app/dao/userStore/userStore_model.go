@@ -31,6 +31,7 @@ type User_Store struct {
 	Host         string        `storm:"index"`
 	IsSystemUser dao.StormBool `storm:"index"` // is a system user
 	Locale       string        ``
+	Display      string        `` // Display Name
 	Source       string        `` // Source Applicaiton of the user (if applicable, for future use)
 }
 
