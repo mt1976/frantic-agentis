@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/asdine/storm/v3 v3.2.1
-	github.com/mt1976/frantic-core v1.2.63
+	github.com/mt1976/frantic-core v1.2.64
 	github.com/mt1976/trnsl8r_connect v1.3.2
 	github.com/robfig/cron/v3 v3.0.1
 )
