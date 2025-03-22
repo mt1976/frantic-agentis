@@ -54,6 +54,8 @@ var (
 	FIELD_Host         = "Host"
 	FIELD_IsSystemUser = "IsSystemUser"
 	FIELD_Locale       = "Locale"
+	FIELD_Display      = "Display"
+	FIELD_Source       = "Source"
 	FIELD_Audit        = "Audit"
 )
 
