@@ -12,7 +12,7 @@ import (
 	"github.com/mt1976/frantic-core/timing"
 )
 
-func New(ctx context.Context, userKey, password string) (Password_Store, error) {
+func New(ctx context.Context, userKey, password, source string) (Password_Store, error) {
 
 	dao.CheckDAOReadyState(domain, audit.CREATE, initialised) // Check the DAO has been initialised, Mandatory.
 
@@ -26,6 +26,11 @@ func New(ctx context.Context, userKey, password string) (Password_Store, error) 
 	record.Key = userKey
 	record.Raw = userKey
 	record.UserKey = userKey
+	record.Source = source // Source of the password
+	if source == "" {
+		record.Source = cfg.GetApplication_Name()
+	}
+	record.Expired.Set(false)
 
 	pwd, err := encode(password)
 	if err != nil {

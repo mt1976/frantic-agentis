@@ -16,6 +16,7 @@ type User_Store struct {
 	ID           int           `csv:"-" storm:"id,increment=100000"` // primary key with auto increment
 	Key          string        `csv:"-" storm:"unique"`              // key
 	Raw          string        `csv:"-" storm:"unique"`              // raw ID before encoding
+	Audit        audit.Audit   `csv:"-"`                             // audit data
 	UID          string        `validate:"required"`
 	GID          string        `storm:"index" validate:"required"`
 	RealName     string        `validate:"required,min=5"` // this field will not be indexed
@@ -29,7 +30,8 @@ type User_Store struct {
 	LastHost     string        `csv:"-"`
 	Host         string        `storm:"index"`
 	IsSystemUser dao.StormBool `storm:"index"` // is a system user
-	Audit        audit.Audit   `csv:"-"`       // audit data
+	Locale       string        ``
+	Source       string        `` // Source Applicaiton of the user (if applicable, for future use)
 }
 
 // Define the field set as names
@@ -50,6 +52,7 @@ var (
 	FIELD_LastHost     = "LastHost"
 	FIELD_Host         = "Host"
 	FIELD_IsSystemUser = "IsSystemUser"
+	FIELD_Locale       = "Locale"
 	FIELD_Audit        = "Audit"
 )
 

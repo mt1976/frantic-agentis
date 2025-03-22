@@ -15,9 +15,9 @@ import (
 )
 
 func New(ctx context.Context, userName, uid, realName, email, gid, host string, isActive, isSystemUser bool) (User_Store, error) {
-	return new(ctx, userName, uid, realName, email, gid, host, isActive, isSystemUser, true)
+	return new(ctx, userName, uid, realName, email, gid, host, isActive, isSystemUser, true, "")
 }
-func new(ctx context.Context, userName, uid, realName, email, gid, host string, isActive, isSystemUser, canLogin bool) (User_Store, error) {
+func new(ctx context.Context, userName, uid, realName, email, gid, host string, isActive, isSystemUser, canLogin bool, locale string) (User_Store, error) {
 
 	dao.CheckDAOReadyState(domain, audit.CREATE, initialised) // Check the DAO has been initialised, Mandatory.
 
@@ -40,6 +40,13 @@ func new(ctx context.Context, userName, uid, realName, email, gid, host string, 
 	record.Key = idHelpers.Encode(record.buildUserCode())
 	record.Raw = record.buildUserCode()
 	record.UserCode = record.buildUserCode()
+	record.Locale = locale
+
+	if locale == "" {
+		record.Locale = cfg.GetApplication_Locale() // default to the application locale
+	}
+
+	record.Source = cfg.GetApplication_Name()
 
 	record.Notes = "These are some notes for " + realName + " " + record.UserCode
 

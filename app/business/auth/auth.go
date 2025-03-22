@@ -51,7 +51,7 @@ func encode(str string) string {
 	return idHelpers.Encode(str)
 }
 
-func SetPassword(ctx context.Context, userKey, inPassword string) error {
+func SetPassword(ctx context.Context, userKey, inPassword, source string) error {
 
 	logHandler.SecurityLogger.Printf("Setting password for user [key=%v]", userKey)
 	// Set the password
@@ -69,7 +69,7 @@ func SetPassword(ctx context.Context, userKey, inPassword string) error {
 	p, err := passwordStore.GetByKey(userKey)
 	if err != nil {
 		// Create a new password object
-		_, err := passwordStore.New(ctx, userKey, inPassword)
+		_, err := passwordStore.New(ctx, userKey, inPassword, source)
 		if err != nil {
 			return err
 		}

@@ -17,6 +17,7 @@ type Password_Store struct {
 	UserKey  string        `csv:"-" storm:"index"`               // user key
 	Password string        `csv:"-"`
 	Expired  dao.StormBool `csv:"-" storm:"index"` // is expired
+	Source   string        `csv:"-"`               // Source Applicaiton of the user (if applicable, for future use)
 	Audit    audit.Audit   `csv:"-"`               // audit data
 }
 
@@ -27,6 +28,8 @@ var (
 	FIELD_Raw      = "Raw"
 	FIELD_UserKey  = "UserKey"
 	FIELD_Password = "Password"
+	FIELD_Expired  = "Expired"
+	FIELD_Source   = "Source" // Effectively the app that set the password
 	FIELD_Audit    = "Audit"
 )
 
