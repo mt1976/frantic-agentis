@@ -33,6 +33,8 @@ type User_Store struct {
 	Locale       string        ``
 	Display      string        `` // Display Name
 	Source       string        `` // Source Applicaiton of the user (if applicable, for future use)
+	Theme        string        `` // Theme
+	Timezone     string        `` // Timezone
 }
 
 // Define the field set as names
@@ -57,6 +59,8 @@ var (
 	FIELD_Display      = "Display"
 	FIELD_Source       = "Source"
 	FIELD_Audit        = "Audit"
+	FIELD_Theme        = "Theme"
+	FIELD_Timezone     = "Timezone"
 )
 
 var domain = "User"

@@ -34,7 +34,7 @@ func Validate(userKey string) (messageHelpers.UserMessage, error) {
 
 	logHandler.SecurityLogger.Printf("[%v] User Validated!: UserKey=[%v] UserCode=[%v]", appName, userKey, user.UserCode)
 	x := messageHelpers.UserMessage{}
-	return x.Request(user.Key, user.UserCode, user.Source, user.Locale), nil
+	return x.Request(user.Key, user.UserCode, user.Source, user.Locale, user.Theme, user.Timezone), nil
 }
 
 func ValidateUserName(userName string) (messageHelpers.UserMessage, error) {
@@ -48,5 +48,5 @@ func ValidateUserName(userName string) (messageHelpers.UserMessage, error) {
 	}
 
 	x := messageHelpers.UserMessage{}
-	return x.Request(user.Key, user.UserCode, user.Source, user.Locale), nil
+	return x.Request(user.Key, user.UserCode, user.Source, user.Locale, user.Theme, user.Timezone), nil
 }
