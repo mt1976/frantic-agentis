@@ -16,7 +16,7 @@ func New(ctx context.Context, userKey, password, source string) (Password_Store,
 
 	dao.CheckDAOReadyState(domain, audit.CREATE, initialised) // Check the DAO has been initialised, Mandatory.
 
-	//logHandler.InfoLogger.Printf("New %v (%v=%v)", domain, FIELD_ID, field1)
+	//logHandler.SecurityLogger.Printf("New %v (%v=%v)", domain, FIELD_ID, field1)
 	clock := timing.Start(domain, actions.CREATE.GetCode(), fmt.Sprintf("%v", userKey))
 
 	//uid := strconv.Itoa(userID)

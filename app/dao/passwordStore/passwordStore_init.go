@@ -34,5 +34,5 @@ func Initialise(ctx context.Context, isolateDB bool) {
 	}
 	initialised = true
 	timing.Stop(1)
-	logHandler.EventLogger.Printf("[%v] Initialised %v", appName, domain)
+	logHandler.DatabaseLogger.Printf("[%v] Initialised %v", appName, domain)
 }

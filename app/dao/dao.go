@@ -21,13 +21,13 @@ var appName = "frantic-agentis"
 
 func Initialise(cfg *commonConfig.Settings) error {
 	clock := timing.Start(name, actions.INITIALISE.GetCode(), "")
-	logHandler.EventLogger.Printf("[%v] Initialising %v - Started", appName, name)
+	logHandler.DatabaseLogger.Printf("[%v] Initialising %v - Started", appName, name)
 
 	userStore.Initialise(context.TODO(), false)
 
 	passwordStore.Initialise(context.TODO(), false)
 
-	logHandler.EventLogger.Printf("[%v] Initialising %v - Complete", appName, name)
+	logHandler.DatabaseLogger.Printf("[%v] Initialising %v - Complete", appName, name)
 	clock.Stop(1)
 	return nil
 }

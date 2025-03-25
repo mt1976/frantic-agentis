@@ -85,7 +85,7 @@ func (u *User_Store) dup() (User_Store, error) {
 	// Get all status
 	foundUser, err := GetBy(FIELD_UserCode, u.UserCode)
 	if err == nil {
-		logHandler.WarningLogger.Printf("[%v] DUPLICATE %v already exist '%v' (%v)", appName, domain, u.UserCode, foundUser.UserName)
+		//	logHandler.WarningLogger.Printf("[%v] DUPLICATE %v already exist '%v' (%v)", appName, domain, u.UserCode, foundUser.UserName)
 		return foundUser, commonErrors.ErrorDuplicate
 	}
 
@@ -115,7 +115,7 @@ func ClearDown(ctx context.Context) error {
 	count := 0
 
 	for thisRecord, record := range recordList {
-		logHandler.InfoLogger.Printf("[%v] Deleting %v (%v/%v) %v", appName, domain, thisRecord, noRecords, record.Key)
+		logHandler.SecurityLogger.Printf("[%v] Deleting %v (%v/%v) %v", appName, domain, thisRecord, noRecords, record.Key)
 		delErr := Delete(ctx, record.ID, fmt.Sprintf("Clearing %v %v @ initialisation ", domain, record.ID))
 		if delErr != nil {
 			logHandler.ErrorLogger.Print(commonErrors.WrapDAOInitialisationError(domain, delErr).Error())

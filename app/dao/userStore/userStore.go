@@ -234,7 +234,7 @@ func DeleteBy(ctx context.Context, field string, value any, note string) error {
 }
 
 func (record *User_Store) Spew() {
-	logHandler.InfoLogger.Printf(" [%v] Record=[%+v]", strings.ToUpper(domain), record)
+	logHandler.SecurityLogger.Printf(" [%v] Record=[%+v]", strings.ToUpper(domain), record)
 }
 
 func (record *User_Store) Validate() error {

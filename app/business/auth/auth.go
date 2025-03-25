@@ -112,14 +112,14 @@ func ValidateUserIDAndPassword(userKey string, password string) error {
 
 func LoginCurrentOSUser(ctx context.Context) userStore.User_Store {
 
-	logHandler.InfoLogger.Printf("[%v] Attempting to Login Current OS User", appName)
+	logHandler.SecurityLogger.Printf("[%v] Attempting to Login Current OS User", appName)
 
 	temp := buildUserStub()
 
 	usr, err := userStore.GetByUserCode(temp.UserCode)
 	if err != nil {
 		logHandler.WarningLogger.Printf("[%v] Warning=[%v] User=[%v]", appName, err.Error(), temp.UserCode)
-		logHandler.InfoLogger.Printf("[%v] User=[%v] does not exist, creating", appName, temp.UserCode)
+		logHandler.SecurityLogger.Printf("[%v] User=[%v] does not exist, creating", appName, temp.UserCode)
 		usr, err = AddCurrentOSUser(ctx)
 		if err != nil {
 			logHandler.ErrorLogger.Printf("[%v] Warning=[%v] User=[%v]", appName, err.Error(), temp.UserCode)
@@ -138,7 +138,7 @@ func LoginCurrentOSUser(ctx context.Context) userStore.User_Store {
 		logHandler.WarningLogger.Printf("[%v] Warning=[%v] User=[%v]", appName, err.Error(), usr.UserName)
 		panic(err)
 	}
-	logHandler.EventLogger.Printf("[%v] User=[%v] Logged In [%v]", appName, usr.UserCode, usr.UserName)
+	logHandler.SecurityLogger.Printf("[%v] User=[%v] Logged In [%v]", appName, usr.UserCode, usr.UserName)
 
 	//setupBehaviours()
 	//usr.Spew()

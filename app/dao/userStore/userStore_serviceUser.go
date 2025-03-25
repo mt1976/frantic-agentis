@@ -20,21 +20,21 @@ func InitialiseServiceUser(cfg *commonConfig.Settings) (messageHelpers.UserMessa
 		panic("Service User - Configuration Error")
 	}
 
-	logHandler.EventLogger.Printf("[%v] System Service User - Generation Starting... '%v'", appName, serviceUserCode)
+	logHandler.SecurityLogger.Printf("[%v] System Service User - Generation Starting... '%v'", appName, serviceUserCode)
 	//check for a system user
 	u, err := GetBy(FIELD_UserCode, serviceUserCode)
 	if err == nil {
-		logHandler.InfoLogger.Printf("[%v] System Service User - already exists 😀 '%v'", appName, serviceUserCode)
+		logHandler.SecurityLogger.Printf("[%v] System Service User - already exists 😀 '%v'", appName, serviceUserCode)
 		return messageHelpers.UserMessage{Key: u.Key, Code: u.UserCode, Source: u.Source}, nil
 	}
-	logHandler.EventLogger.Printf("[%v] System Service User - does not exist, creating '%v'", appName, serviceUserCode)
+	logHandler.SecurityLogger.Printf("[%v] System Service User - does not exist, creating '%v'", appName, serviceUserCode)
 	su, err := new(context.TODO(), serviceUserName, serviceUserUID, "System Service User "+serviceUserName, serviceUserName+"@"+application.SystemIdentity(), serviceUserUID, application.SystemIdentity(), true, true, false, "")
 	if err != nil {
 		logHandler.ErrorLogger.Printf("[%v] ERROR Unable to Create System Service User [%v]", appName, err.Error())
 		return messageHelpers.UserMessage{}, err
 	}
 
-	logHandler.EventLogger.Printf("[%v] System Service User - Created '%v'", appName, serviceUserCode)
+	logHandler.SecurityLogger.Printf("[%v] System Service User - Created '%v'", appName, serviceUserCode)
 	if su.Source == "" {
 		// Set the source to the application name if its not been set
 		su.Source = cfg.GetApplication_Name()

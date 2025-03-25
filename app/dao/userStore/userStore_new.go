@@ -21,7 +21,7 @@ func new(ctx context.Context, userName, uid, realName, email, gid, host string, 
 
 	dao.CheckDAOReadyState(domain, audit.CREATE, initialised) // Check the DAO has been initialised, Mandatory.
 
-	//logHandler.InfoLogger.Printf("New %v (%v=%v)", domain, FIELD_ID, field1)
+	//logHandler.SecurityLogger.Printf("New %v (%v=%v)", domain, FIELD_ID, field1)
 	clock := timing.Start(domain, actions.CREATE.GetCode(), fmt.Sprintf("%v", userName))
 
 	// Create a new struct

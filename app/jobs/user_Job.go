@@ -143,17 +143,17 @@ func jobProcessor(job *UserMaintenanceJob, db *database.DB) {
 	appName := cfg.GetApplication_Name()
 	// Ensure the job has the correct database connection
 	if db == nil {
-		logHandler.EventLogger.Printf("[%v] Running %v tasks with default database for %v", jobs.CodedName(job), jobName, appName)
+		logHandler.ServiceLogger.Printf("[%v] Running %v tasks with default database for %v", jobs.CodedName(job), jobName, appName)
 	} else {
-		logHandler.EventLogger.Printf("[%v] Running %v tasks with database=[%v-%v.db]", jobs.CodedName(job), jobName, appName, db.Name)
+		logHandler.ServiceLogger.Printf("[%v] Running %v tasks with database=[%v-%v.db]", jobs.CodedName(job), jobName, appName, db.Name)
 	}
 
 	userStore.Worker(job, db)
 
 	// Report the completion of the job
 	if db == nil {
-		logHandler.EventLogger.Printf("[%v] Completed %v tasks with default database for %v", jobs.CodedName(job), jobName, appName)
+		logHandler.ServiceLogger.Printf("[%v] Completed %v tasks with default database for %v", jobs.CodedName(job), jobName, appName)
 	} else {
-		logHandler.EventLogger.Printf("[%v] Completed %v tasks with database=[%v-%v.db]", jobs.CodedName(job), jobName, appName, db.Name)
+		logHandler.ServiceLogger.Printf("[%v] Completed %v tasks with database=[%v-%v.db]", jobs.CodedName(job), jobName, appName, db.Name)
 	}
 }

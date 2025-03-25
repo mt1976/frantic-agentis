@@ -82,7 +82,7 @@ func ClearDown(ctx context.Context) error {
 	count := 0
 
 	for thisRecord, record := range recordList {
-		logHandler.InfoLogger.Printf("[%v] Deleting %v (%v/%v) %v", appName, domain, thisRecord, noRecords, record.Key)
+		logHandler.SecurityLogger.Printf("[%v] Deleting %v (%v/%v) %v", appName, domain, thisRecord, noRecords, record.Key)
 		delErr := Delete(ctx, record.ID, fmt.Sprintf("[%v] Clearing %v %v @ initialisation ", appName, domain, record.ID))
 		if delErr != nil {
 			logHandler.ErrorLogger.Printf("[%v] %v", appName, commonErrors.WrapDAOInitialisationError(domain, delErr).Error())
