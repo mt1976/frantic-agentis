@@ -129,15 +129,15 @@ func ClearDown(ctx context.Context) error {
 	return nil
 }
 
-func GetByUserName(userName string) (User_Store, error) {
+func GetByUserName(userName string) (*User_Store, error) {
 	xx, err := GetBy(FIELD_UserName, userName)
 	if err != nil {
 		logHandler.SecurityLogger.Printf("[%v] User Not Found!: %v=[%v]", appName, FIELD_UserName, userName)
-		return User_Store{}, err
+		return &User_Store{}, err
 	}
 	logHandler.SecurityLogger.Printf("[%v] User Found!: %v=[%v] UserCode=[%v]", appName, FIELD_UserName, userName, xx.UserCode)
 	logHandler.SecurityLogger.Printf("[%v] %+v", appName, xx)
-	return xx, nil
+	return &xx, nil
 }
 
 func (u *User_Store) SetName(name string) error {
