@@ -136,6 +136,7 @@ func GetByUserName(userName string) (User_Store, error) {
 		return User_Store{}, err
 	}
 	logHandler.SecurityLogger.Printf("[%v] User Found!: %v=[%v] UserCode=[%v]", appName, FIELD_UserName, userName, xx.UserCode)
+	logHandler.SecurityLogger.Printf("[%v] %+v", appName, xx)
 	return xx, nil
 }
 
