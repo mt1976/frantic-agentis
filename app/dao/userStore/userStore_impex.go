@@ -32,8 +32,14 @@ func importProcessor(inOriginal **User_Store) (string, error) {
 		record.RealName = importedData.RealName
 		record.UserName = importedData.UserName
 		record.Email = importedData.Email
-		record.IsActive = importedData.IsActive
+		//record.IsActive = importedData.IsActive
 		record.Host = importedData.Host
+		//record.IsSystemUser = importedData.IsSystemUser
+		record.Locale = importedData.Locale
+		record.Source = importedData.Source
+		record.Theme = importedData.Theme
+		record.Timezone = importedData.Timezone
+		record.Role = importedData.Role
 
 		err := record.Update(context.TODO(), "Imported/Refreshed")
 		if err != nil {
@@ -45,7 +51,7 @@ func importProcessor(inOriginal **User_Store) (string, error) {
 	} else {
 
 		// New(ctx context.Context, userName, uid, realName, email, gid, host string,active bool)
-		newUser, err := New(context.TODO(), importedData.UserName, importedData.UID, importedData.RealName, importedData.Email, importedData.GID, importedData.Host, importedData.IsActive.Bool(), importedData.IsSystemUser.Bool())
+		newUser, err := New(context.TODO(), importedData.UserName, importedData.UID, importedData.RealName, importedData.Email, importedData.GID, importedData.Host, importedData.IsActive.Bool(), false, importedData.Locale, importedData.Timezone, importedData.Role, importedData.Theme)
 		if err != nil {
 			logHandler.ImportLogger.Panicf("[%v] Error importing %v: %v [%v]", appName, domain, tempUserCode, err.Error())
 			return newUser.UserCode, err

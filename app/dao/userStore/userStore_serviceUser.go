@@ -28,7 +28,7 @@ func InitialiseServiceUser(cfg *commonConfig.Settings) (messageHelpers.UserMessa
 		return messageHelpers.UserMessage{Key: u.Key, Code: u.UserCode, Source: u.Source}, nil
 	}
 	logHandler.SecurityLogger.Printf("[%v] System Service User - does not exist, creating '%v'", appName, serviceUserCode)
-	su, err := new(context.TODO(), serviceUserName, serviceUserUID, "System Service User "+serviceUserName, serviceUserName+"@"+application.SystemIdentity(), serviceUserUID, application.SystemIdentity(), true, true, false, "")
+	su, err := new(context.TODO(), serviceUserName, serviceUserUID, "System Service User "+serviceUserName, serviceUserName+"@"+application.SystemIdentity(), serviceUserUID, application.SystemIdentity(), true, true, true, cfg.GetApplication_Locale(), cfg.GetApplication_Timezone(), "service", "default")
 	if err != nil {
 		logHandler.ErrorLogger.Printf("[%v] ERROR Unable to Create System Service User [%v]", appName, err.Error())
 		return messageHelpers.UserMessage{}, err
@@ -39,5 +39,8 @@ func InitialiseServiceUser(cfg *commonConfig.Settings) (messageHelpers.UserMessa
 		// Set the source to the application name if its not been set
 		su.Source = cfg.GetApplication_Name()
 	}
-	return messageHelpers.UserMessage{Key: su.Key, Code: su.UserCode, Source: su.Source}, nil
+
+	um := messageHelpers.UserMessage{}
+	um.Request(su.Key, su.UserCode, su.Source, su.Locale, su.Theme, su.Timezone, su.Role)
+	return um, nil
 }

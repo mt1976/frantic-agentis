@@ -157,7 +157,7 @@ func AddCurrentOSUser(ctx context.Context) (userStore.User_Store, error) {
 		return oldu, nil
 	}
 
-	u, err := userStore.New(ctx, testu.UserName, testu.UID, testu.RealName, testu.Email, testu.GID, testu.Host, true, false)
+	u, err := userStore.New(ctx, testu.UserName, testu.UID, testu.RealName, testu.Email, testu.GID, testu.Host, true, false, cfg.GetApplication_Locale(), cfg.GetApplication_Timezone(), "default", "default")
 	if err != nil {
 		logHandler.ErrorLogger.Printf(translation.Get("[%v] Error=[%v]"), appName, err.Error())
 		return userStore.User_Store{}, err

@@ -24,17 +24,18 @@ type User_Store struct {
 	UserCode     string        `csv:"-" storm:"index" validate:"required,min=5"`
 	Email        string        `storm:"index"`
 	Notes        string        `csv:"-" validate:"max=75"`
-	IsActive     dao.StormBool `storm:"index"`
-	CanLogin     dao.StormBool `storm:"index"`
+	IsActive     dao.StormBool `csv:"-" storm:"index"`
+	CanLogin     dao.StormBool `csv:"-" storm:"index"`
 	LastLogin    time.Time     `csv:"-"`
 	LastHost     string        `csv:"-"`
 	Host         string        `storm:"index"`
-	IsSystemUser dao.StormBool `storm:"index"` // is a system user
+	IsSystemUser dao.StormBool `csv:"-" storm:"index"` // is a system user
 	Locale       string        ``
-	Display      string        `` // Display Name
-	Source       string        `` // Source Applicaiton of the user (if applicable, for future use)
-	Theme        string        `` // Theme
-	Timezone     string        `` // Timezone
+	Display      string        `csv:"-"`       // Display Name
+	Source       string        ``              // Source Applicaiton of the user (if applicable, for future use)
+	Theme        string        ``              // Theme
+	Timezone     string        ``              // Timezone
+	Role         string        `storm:"index"` // Role
 }
 
 // Define the field set as names
