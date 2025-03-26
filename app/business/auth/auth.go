@@ -86,8 +86,9 @@ func SetPassword(ctx context.Context, userKey, inPassword, source string) error 
 
 func ValidateUserIDAndPassword(userKey string, password string) error {
 	// Validate the password
+	logHandler.SecurityLogger.Printf("Validating password for user [key='%v']", userKey)
 
-	record, err := passwordStore.GetByKey(userKey)
+	record, err := passwordStore.GetBy(passwordStore.FIELD_Key, userKey)
 	if err != nil {
 		logHandler.SecurityLogger.Printf("Error getting password: %v", err)
 		return err
